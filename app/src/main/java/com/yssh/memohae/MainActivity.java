@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Memo RecyclerView Adapter
      */
-    private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private static final int TYPE_ITEM = 0;
         List<MemoVO> listItems;
 
@@ -126,15 +126,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        private class MemoViewHolder extends RecyclerView.ViewHolder{
-            ViewGroup memo_item_vg;
-            TextView memo_text_tv;
+        class MemoViewHolder extends RecyclerView.ViewHolder{
+            @BindView(R.id.memo_item_layout) ViewGroup memo_item_vg;
+            @BindView(R.id.memo_text_tv) TextView memo_text_tv;
 
             private MemoViewHolder(View itemView){
                 super(itemView);
 
-                memo_item_vg = (ViewGroup)itemView.findViewById(R.id.memo_item_layout);
-                memo_text_tv = (TextView)itemView.findViewById(R.id.memo_text_tv);
+                ButterKnife.bind(this, itemView);
             }
         }
 
