@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private Realm mRealm;
 
+    @BindView(R.id.main_activity_layout) ViewGroup main_activity_vg;
+
     @BindView(R.id.memo_recyclerView) RecyclerView memoRecyclerView;
 
     @Override
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
@@ -66,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         memoRecyclerView.setLayoutManager(linearLayoutManager);
         memoRecyclerView.setAdapter(adapter);
+    }
+
+    private void setBackground(int colorId){
+        main_activity_vg.setBackgroundColor(getResources().getColor(R.color.colorBlack));
     }
 
     /**
