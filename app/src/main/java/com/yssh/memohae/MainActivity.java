@@ -158,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.setting_btn) void settingClicked(){
-
+        Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+        startActivity(intent);
     }
 
 }
