@@ -1,5 +1,7 @@
 package com.yssh.memohae;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,8 +151,46 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.delete_memo_btn) void deleteMemoClicked(){
+    /**
+     * Realm DB 의 모든 Data 삭제
+     */
+    private void deleteAllMemoDB(){
+        RealmResults<MemoVO> memoVORealmResults = mRealm.where(MemoVO.class).findAll();
+        mRealm.beginTransaction();
+        memoVORealmResults.deleteAllFromRealm();
+        mRealm.commitTransaction();
 
+        setData();
+    }
+
+    /**
+     * All Delete Memo Dialog 노출
+     */
+    private void showAllDeleteDialog(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("전체 삭제");
+        alert.setMessage("전체 삭제하시겠습니까?");
+        alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                deleteAllMemoDB();
+            }
+        });
+        alert.setNegativeButton("아니오",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+
+                    }
+                });
+        alert.show();
+    }
+
+    @OnClick(R.id.delete_memo_btn) void deleteMemoClicked(){
+        if(memoItems.size() > 0){
+            showAllDeleteDialog();
+        }else{
+            Toast.makeText(getApplicationContext(), "삭제할 메모가 없습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.write_memo_btn) void writeMemoClicked(){
