@@ -10,5 +10,23 @@ import io.realm.annotations.PrimaryKey;
 public class MemoVO extends RealmObject{
     @PrimaryKey
     private int no;
+    private String memoText;
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public String getMemoText() {
+        return memoText;
+    }
+
+    public void setMemoText(String memoText) {
+        this.memoText = memoText;
+    }
+
 
 }

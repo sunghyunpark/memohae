@@ -1,9 +1,11 @@
 package com.yssh.memohae;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +16,32 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import model.MemoModel;
+import butterknife.OnClick;
+import database.RealmConfig;
+import database.model.MemoVO;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<MemoModel> memoItems;
+    private ArrayList<MemoVO> memoItems;
     private RecyclerAdapter adapter;
+    private Realm mRealm;
 
     @BindView(R.id.memo_recyclerView) RecyclerView memoRecyclerView;
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        setData();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mRealm.close();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +52,41 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-        setData();
     }
 
     /**
      * init
      */
     private void init(){
-        memoItems = new ArrayList<MemoModel>();
+        memoItems = new ArrayList<MemoVO>();
         adapter = new RecyclerAdapter(memoItems);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         memoRecyclerView.setLayoutManager(linearLayoutManager);
         memoRecyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Realm DB 로 부터 Memo 데이터를 받아와 List 에 저장
+     */
     private void setData(){
-        MemoModel memoModel;
-        for(int i=0;i<10;i++){
-            memoModel = new MemoModel();
-            memoModel.setNo(i);
-            memoModel.setMemoText(i+"");
-            memoItems.add(memoModel);
+        if(memoItems != null){
+            memoItems.clear();
         }
+
+        RealmConfig realmConfig = new RealmConfig();
+        mRealm = Realm.getInstance(realmConfig.MemoRealmVersion(getApplicationContext()));
+
+        RealmResults<MemoVO> memoVORealmResults = mRealm.where(MemoVO.class).findAll();
+        int listSize = memoVORealmResults.size();
+
+        for(int i=listSize-1;i>=0;i--){
+            memoItems.add(memoVORealmResults.get(i));
+            Log.d("MemoData","============================================");
+            Log.d("MemoData", "Memo NO : "+memoVORealmResults.get(i).getNo());
+            Log.d("MemoData", "Memo Text : "+memoVORealmResults.get(i).getMemoText());
+            Log.d("MemoData","============================================");
+        }
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -62,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private static final int TYPE_ITEM = 0;
-        List<MemoModel> listItems;
+        List<MemoVO> listItems;
 
-        private RecyclerAdapter(List<MemoModel> listItems) {
+        private RecyclerAdapter(List<MemoVO> listItems) {
             this.listItems = listItems;
         }
 
@@ -77,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
         }
 
-        private MemoModel getItem(int position) {
+        private MemoVO getItem(int position) {
             return listItems.get(position);
         }
 
@@ -85,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
             if (holder instanceof MemoViewHolder) {
-                final MemoModel currentItem = getItem(position);
+                final MemoVO currentItem = getItem(position);
                 final MemoViewHolder VHitem = (MemoViewHolder)holder;
 
                 VHitem.memo_text_tv.setText(currentItem.getMemoText());
@@ -115,4 +148,18 @@ public class MainActivity extends AppCompatActivity {
             return listItems.size();
         }
     }
+
+    @OnClick(R.id.delete_memo_btn) void deleteMemoClicked(){
+
+    }
+
+    @OnClick(R.id.write_memo_btn) void writeMemoClicked(){
+        Intent intent = new Intent(getApplicationContext(), WriteMemoActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.setting_btn) void settingClicked(){
+
+    }
+
 }
