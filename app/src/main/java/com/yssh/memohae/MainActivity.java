@@ -25,12 +25,15 @@ import database.RealmConfig;
 import database.model.MemoVO;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import view.SettingActivity;
+import view.WriteMemoActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<MemoVO> memoItems;
     private RecyclerAdapter adapter;
     private Realm mRealm;
+    private SettingManager settingManager;
 
     @BindView(R.id.main_activity_layout) ViewGroup main_activity_vg;
     @BindView(R.id.memo_recyclerView) RecyclerView memoRecyclerView;
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
      * init
      */
     private void init(){
+        settingManager = new SettingManager(getApplicationContext());
         memoItems = new ArrayList<MemoVO>();
         adapter = new RecyclerAdapter(memoItems);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -76,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setBackground(){
-        SettingManager settingManager = new SettingManager(getApplicationContext());
         main_activity_vg.setBackgroundResource(settingManager.getBackgroundColor());
     }
 

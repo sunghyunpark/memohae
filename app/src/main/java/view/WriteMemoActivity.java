@@ -1,9 +1,11 @@
-package com.yssh.memohae;
+package view;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.yssh.memohae.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,7 +18,8 @@ public class WriteMemoActivity extends AppCompatActivity {
 
     private Realm mRealm;
 
-    @BindView(R.id.memo_edit_box) EditText memo_et;
+    @BindView(R.id.memo_edit_box)
+    EditText memo_et;
 
     @Override
     public void onDestroy(){

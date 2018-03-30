@@ -16,8 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteMemoActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name="view.SettingActivity" />
+        <activity android:name="view.WriteMemoActivity" />
+        <activity android:name="view.ColorSettingActivity"></activity>
     </application>
 
 </manifest>

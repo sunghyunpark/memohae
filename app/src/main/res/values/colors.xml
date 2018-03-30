@@ -6,5 +6,18 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="background_color_default">#81d4fa</color>
+    <color name="background_color_purple">#9C27B0</color>
+    <color name="background_color_deep_purple">#673AB7</color>
+    <color name="background_color_indigo">#3F51B5</color>
+    <color name="background_color_blue">#2196F3</color>
+    <color name="background_color_cyon">#00BCD4</color>
+    <color name="background_color_teal">#009688</color>
     <color name="background_color_green">#4CAF50</color>
+    <color name="background_color_light_green">#8BC34A</color>
+    <color name="background_color_lime">#CDDC39</color>
+    <color name="background_color_amber">#FFC107</color>
+    <color name="background_color_orange">#FF9800</color>
+    <color name="background_color_deep_orange">#FF5722</color>
+    <color name="background_color_blue_gray">#607D8B</color>
+    <color name="background_color_brown">#795548</color>
 </resources>
