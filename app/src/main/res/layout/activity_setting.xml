@@ -51,6 +51,7 @@
         android:text="설정"/>
 
     <RelativeLayout
+        android:id="@+id/background_setting_layout"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginTop="10dp"

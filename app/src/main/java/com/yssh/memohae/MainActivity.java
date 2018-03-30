@@ -33,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
     private Realm mRealm;
 
     @BindView(R.id.main_activity_layout) ViewGroup main_activity_vg;
-
     @BindView(R.id.memo_recyclerView) RecyclerView memoRecyclerView;
 
     @Override
     public void onResume(){
         super.onResume();
+
+        setBackground();
 
         setData();
     }
@@ -74,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
         memoRecyclerView.setAdapter(adapter);
     }
 
-    private void setBackground(int colorId){
-        main_activity_vg.setBackgroundColor(getResources().getColor(R.color.colorBlack));
+    private void setBackground(){
+        SettingManager settingManager = new SettingManager(getApplicationContext());
+        main_activity_vg.setBackgroundResource(settingManager.getBackgroundColor());
     }
 
     /**
