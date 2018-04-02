@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yssh.memohae.helper.ItemTouchHelperAdapter;
+import com.yssh.memohae.helper.OnStartDragListener;
+import com.yssh.memohae.helper.SimpleItemTouchHelperCallback;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,12 +34,13 @@ import io.realm.RealmResults;
 import view.SettingActivity;
 import view.WriteMemoActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnStartDragListener {
 
     private ArrayList<MemoVO> memoItems;
     private RecyclerAdapter adapter;
     private Realm mRealm;
     private SettingManager settingManager;
+    private ItemTouchHelper mItemTouchHelper;
 
     @BindView(R.id.main_activity_layout) ViewGroup main_activity_vg;
     @BindView(R.id.memo_recyclerView) RecyclerView memoRecyclerView;
@@ -77,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         memoRecyclerView.setLayoutManager(linearLayoutManager);
         memoRecyclerView.setAdapter(adapter);
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(memoRecyclerView);
     }
 
     private void setBackground(){
@@ -111,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Memo RecyclerView Adapter
      */
-    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ItemTouchHelperAdapter {
         private static final int TYPE_ITEM = 0;
         List<MemoVO> listItems;
 
@@ -156,6 +167,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
+        public boolean onItemMove(int fromPosition, int toPosition) {
+            Collections.swap(listItems, fromPosition, toPosition);
+            notifyItemMoved(fromPosition, toPosition);
+            return true;
+        }
+
+        @Override
+        public void onItemDismiss(int position) {
+            deleteMemoDB(getItem(position).getNo());
+            listItems.remove(position);
+            notifyItemRemoved(position);
+        }
+
+        @Override
         public int getItemViewType(int position) {
             return TYPE_ITEM;
         }
@@ -179,6 +204,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Realm DB 에서 해당 position item 의 no 를 삭제
+     * @param position
+     */
+    private void deleteMemoDB(int position){
+        MemoVO memoVO = mRealm.where(MemoVO.class).equalTo("no",(position)).findFirst();
+        mRealm.beginTransaction();
+        memoVO.deleteFromRealm();
+        mRealm.commitTransaction();
+
+    }
+
+    /**
      * All Delete Memo Dialog 노출
      */
     private void showAllDeleteDialog(){
@@ -198,6 +235,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         alert.show();
+    }
+
+    /**
+     * drag and drop
+     * @param viewHolder
+     */
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
     }
 
     @OnClick(R.id.delete_memo_btn) void deleteMemoClicked(){

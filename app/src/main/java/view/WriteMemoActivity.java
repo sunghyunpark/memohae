@@ -54,7 +54,7 @@ public class WriteMemoActivity extends AppCompatActivity {
         MemoVO memoVO = new MemoVO();
 
         Number maxId = mRealm.where(MemoVO.class).max("no");
-        int nextId = (maxId == null) ? 1:maxId.intValue() + 1;
+        int nextId = (maxId == null) ? 0:maxId.intValue() + 1;
 
         memoVO.setNo(nextId);
         memoVO.setMemoText(memoTextStr);
