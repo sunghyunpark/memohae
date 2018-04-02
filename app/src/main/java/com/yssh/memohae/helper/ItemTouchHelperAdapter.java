@@ -1,7 +1,7 @@
 package com.yssh.memohae.helper;
 
 /**
- * Created by SungHyun on 2018-04-02.
+ * https://github.com/iPaulPro/Android-ItemTouchHelper-Demo
  */
 
 public interface ItemTouchHelperAdapter {

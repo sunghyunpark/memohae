@@ -3,7 +3,7 @@ package com.yssh.memohae.helper;
 import android.support.v7.widget.RecyclerView;
 
 /**
- * Created by SungHyun on 2018-04-02.
+ * https://github.com/iPaulPro/Android-ItemTouchHelper-Demo
  */
 
 public interface OnStartDragListener {
