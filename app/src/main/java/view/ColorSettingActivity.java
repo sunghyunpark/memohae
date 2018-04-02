@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -22,9 +23,6 @@ import butterknife.OnClick;
 public class ColorSettingActivity extends AppCompatActivity {
 
     private int[] colorArray = {
-            R.color.background_color_purple,
-            R.color.background_color_deep_purple,
-            R.color.background_color_indigo,
             R.color.background_color_blue,
             R.color.background_color_default,
             R.color.background_color_cyon,
@@ -35,8 +33,11 @@ public class ColorSettingActivity extends AppCompatActivity {
             R.color.background_color_amber,
             R.color.background_color_orange,
             R.color.background_color_deep_orange,
+            R.color.background_color_purple,
+            R.color.background_color_deep_purple,
             R.color.background_color_brown,
-            R.color.background_color_blue_gray
+            R.color.background_color_blue_gray,
+            R.color.background_color_indigo
             };
     private SettingManager settingManager;
 
@@ -114,6 +115,8 @@ public class ColorSettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         settingManager.setBackgroundColor(currentItem);
+                        Toast.makeText(getApplicationContext(), "배경 색상이 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
             }
