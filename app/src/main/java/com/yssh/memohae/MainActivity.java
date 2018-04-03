@@ -31,6 +31,7 @@ import database.RealmConfig;
 import database.model.MemoVO;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import view.EditMemoActivity;
 import view.SettingActivity;
 import view.WriteMemoActivity;
 
@@ -151,6 +152,16 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
                 final MemoViewHolder VHitem = (MemoViewHolder)holder;
 
                 VHitem.memo_text_tv.setText(currentItem.getMemoText());
+
+                VHitem.memo_item_vg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), EditMemoActivity.class);
+                        intent.putExtra("memoNo", currentItem.getNo());
+                        intent.putExtra("memoText", currentItem.getMemoText());
+                        startActivity(intent);
+                    }
+                });
 
             }
         }
