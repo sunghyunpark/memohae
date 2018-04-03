@@ -64,7 +64,7 @@
             android:layout_marginLeft="25dp"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
-            android:text="배경 설정"/>
+            android:text="@string/setting_activity_current_bg_txt"/>
 
         <ImageView
             android:id="@+id/current_background_color_iv"
@@ -89,7 +89,7 @@
             android:layout_marginLeft="25dp"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
-            android:text="리뷰 쓰기"/>
+            android:text="@string/setting_activity_write_review_txt"/>
 
     </RelativeLayout>
 
@@ -106,7 +106,7 @@
             android:layout_marginLeft="25dp"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
-            android:text="추천"/>
+            android:text="@string/setting_activity_recommend_txt"/>
 
     </RelativeLayout>
 
@@ -123,7 +123,7 @@
             android:layout_marginLeft="25dp"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
-            android:text="도움말"/>
+            android:text="@string/setting_activity_help_txt"/>
 
     </RelativeLayout>
 
@@ -140,7 +140,17 @@
             android:layout_marginLeft="25dp"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
-            android:text="버전 정보"/>
+            android:text="@string/setting_activity_app_version_txt"/>
+
+        <TextView
+            android:id="@+id/current_app_version_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:textSize="15dp"
+            android:textColor="#BDBDBD"/>
 
     </RelativeLayout>
 

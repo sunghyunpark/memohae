@@ -1,10 +1,13 @@
 package view;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -18,6 +21,7 @@ import butterknife.OnClick;
 public class SettingActivity extends AppCompatActivity {
 
     @BindView(R.id.current_background_color_iv) ImageView current_color_iv;
+    @BindView(R.id.current_app_version_tv) TextView current_app_version_tv;
 
     @Override
     public  void onResume(){
@@ -33,12 +37,19 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void init(){
+        currentColorThumbnail();
+
+        currentAppVersion();
+
+    }
+
+    /**
+     * 현재 배경색상
+     */
+    private void currentColorThumbnail(){
         SettingManager settingManager = new SettingManager(getApplicationContext());
-
         Drawable drawable = getResources().getDrawable(settingManager.getBackgroundColor());
-
         //Glide Options
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.centerCrop();
         requestOptions.placeholder(drawable);
@@ -47,10 +58,18 @@ public class SettingActivity extends AppCompatActivity {
                 .setDefaultRequestOptions(requestOptions)
                 .load(null)
                 .into(current_color_iv);
+    }
 
-        //current_color_iv.setBackgroundResource(settingManager.getBackgroundColor());
-        //Log.d("SettingManager", settingManager.getBackgroundColor()+"");
-
+    /**
+     * 현재 앱 버전
+     */
+    private void currentAppVersion(){
+        String version;
+        try {
+            PackageInfo i = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0);
+            version = i.versionName;
+            current_app_version_tv.setText("v"+version);
+        } catch(PackageManager.NameNotFoundException e) { }
     }
 
     @OnClick(R.id.back_btn) void backClicked(){

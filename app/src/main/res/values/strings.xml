@@ -5,6 +5,11 @@
     <string name="write_memo_activity_save_btn_txt">작성</string>
     <!-- setting activity -->
     <string name="setting_activity_title">설정</string>
+    <string name="setting_activity_current_bg_txt">배경설정</string>
+    <string name="setting_activity_write_review_txt">리뷰쓰기</string>
+    <string name="setting_activity_recommend_txt">추천하기</string>
+    <string name="setting_activity_help_txt">도움말</string>
+    <string name="setting_activity_app_version_txt">버전정보</string>
     <!-- color setting activity-->
     <string name="color_setting_activity_title">배경색상</string>
 </resources>
