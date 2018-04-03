@@ -1,9 +1,11 @@
 package view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.yssh.memohae.R;
 
@@ -74,5 +76,12 @@ public class EditMemoActivity extends AppCompatActivity {
 
     @OnClick(R.id.back_btn) void backClicked(){
         finish();
+    }
+    
+    @OnClick(R.id.copy_btn) void copyClicked(){
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("LABEL", memoText);
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(getApplicationContext(), "클립보드에 복사했습니다.", Toast.LENGTH_SHORT).show();
     }
 }

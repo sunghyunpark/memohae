@@ -8,11 +8,13 @@
     <string name="setting_activity_current_bg_txt">배경설정</string>
     <string name="setting_activity_write_review_txt">리뷰쓰기</string>
     <string name="setting_activity_recommend_txt">추천하기</string>
-    <string name="setting_activity_help_txt">도움말</string>
+    <string name="setting_activity_help_txt">사용법</string>
     <string name="setting_activity_app_version_txt">버전정보</string>
     <!-- color setting activity-->
     <string name="color_setting_activity_title">배경색상</string>
     <!-- edit memo activity-->
     <string name="edit_memo_activity_title">수정</string>
     <string name="edit_memo_activity_save_btn_txt">저장</string>
+
+    <string name="help_txt">- 작성 : +버튼 탭\n\n- 삭제 : 좌 or 우로 스와이프\n\n- 순서 이동 : 꾹 누른 후 이동\n\n- 수정 : 메모 탭</string>
 </resources>

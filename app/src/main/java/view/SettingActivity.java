@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -78,6 +79,17 @@ public class SettingActivity extends AppCompatActivity {
 
     @OnClick(R.id.background_setting_layout) void backgroundSettingClicked(){
         Intent intent = new Intent(getApplicationContext(), ColorSettingActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.go_to_playstore_layout) void goToPlayStoreClicked(){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + getPackageName()));
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.help_layout) void goToHelpClicked(){
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
         startActivity(intent);
     }
 }

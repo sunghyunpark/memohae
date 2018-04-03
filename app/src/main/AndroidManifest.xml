@@ -19,7 +19,8 @@
         <activity android:name="view.SettingActivity" />
         <activity android:name="view.WriteMemoActivity" />
         <activity android:name="view.ColorSettingActivity" />
-        <activity android:name="view.EditMemoActivity"></activity>
+        <activity android:name="view.EditMemoActivity" />
+        <activity android:name="view.HelpActivity"></activity>
     </application>
 
 </manifest>
