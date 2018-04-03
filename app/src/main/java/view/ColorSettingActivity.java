@@ -119,6 +119,15 @@ public class ColorSettingActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+
+                /*
+                현재 선택되어있는 color 에 체크표시
+                 */
+                if(isChecked(position)){
+                    VHitem.checked_iv.setVisibility(View.VISIBLE);
+                }else{
+                    VHitem.checked_iv.setVisibility(View.GONE);
+                }
             }
         }
 
@@ -126,12 +135,19 @@ public class ColorSettingActivity extends AppCompatActivity {
 
             @BindView(R.id.color_iv) ImageView color_iv;
             @BindView(R.id.item_layout) ViewGroup item_layout;
+            @BindView(R.id.checked_img) ImageView checked_iv;
 
             private ColorHolder(View itemView){
                 super(itemView);
 
                 ButterKnife.bind(this, itemView);
             }
+        }
+
+        private boolean isChecked(int position){
+            int currentColorId = settingManager.getBackgroundColor();
+
+            return currentColorId == getItem(position);
         }
 
         @Override
