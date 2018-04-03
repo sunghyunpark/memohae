@@ -92,4 +92,18 @@ public class SettingActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.recommend_layout) void recommendClicked(){
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        //String subject = "문자의 제목";
+        String text = "https://play.google.com/store/apps/details?id="+getPackageName();
+        //intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+
+        // Title of intent
+        Intent chooser = Intent.createChooser(intent, "친구에게 공유하기");
+        startActivity(chooser);
+
+    }
 }
