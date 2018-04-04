@@ -1,5 +1,7 @@
 package view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -109,8 +111,29 @@ public class SettingActivity extends AppCompatActivity {
     }
     
     @OnClick(R.id.patter_setting_layout) void patternSettingClicked(){
-        Intent intent = new Intent(getApplicationContext(), PatternActivity.class);
-        startActivity(intent);
+        if(TextUtils.isEmpty(settingManager.getPatternKey())){
+            Intent intent = new Intent(getApplicationContext(), PatternActivity.class);
+            intent.putExtra("patternMode", PatternActivity.NOT_REGISTER_PATTERN_MODE);
+            startActivity(intent);
+        }else{
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("초기화");
+            alert.setMessage("패턴을 초기화 하시겠습니까?");
+            alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    settingManager.setPatternKey(null);
+                    pattern_state_tv.setText("설정 안됨");
+                }
+            });
+            alert.setNegativeButton("아니오",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // Canceled.
+
+                        }
+                    });
+            alert.show();
+        }
     }
 
     @OnClick(R.id.recommend_layout) void recommendClicked(){

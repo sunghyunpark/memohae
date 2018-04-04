@@ -17,13 +17,16 @@
         android:textSize="15dp"
         android:text="초기화"/>
 
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+
+    <TextView
+        android:id="@+id/pattern_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="104dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/profile_name"

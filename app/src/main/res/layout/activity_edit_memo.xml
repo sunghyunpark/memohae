@@ -32,24 +32,33 @@
             android:textColor="@color/colorBlack"
             android:textSize="18dp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/done_img"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
-            android:text="@string/edit_memo_activity_save_btn_txt"
-            android:textColor="@color/colorBlack"
-            android:textSize="15dp"/>
+            android:textColor="@color/colorBlack" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/copy_btn"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_toLeftOf="@+id/save_btn"
             android:layout_centerVertical="true"
-            android:src="@mipmap/copy_img"/>
+            android:layout_marginRight="15dp"
+            android:background="@mipmap/copy_img"/>
+
+        <ImageButton
+            android:id="@+id/lock_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@+id/copy_btn"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@mipmap/lock_open_img"/>
     </RelativeLayout>
     <!--구분선-->
     <LinearLayout

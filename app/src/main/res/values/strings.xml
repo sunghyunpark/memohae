@@ -5,12 +5,12 @@
     <string name="write_memo_activity_save_btn_txt">저장</string>
     <!-- setting activity -->
     <string name="setting_activity_title">설정</string>
-    <string name="setting_activity_current_bg_txt">배경설정</string>
-    <string name="setting_activity_pattern_txt">패턴설정</string>
-    <string name="setting_activity_write_review_txt">리뷰쓰기</string>
-    <string name="setting_activity_recommend_txt">추천하기</string>
+    <string name="setting_activity_current_bg_txt">배경 설정</string>
+    <string name="setting_activity_pattern_txt">패턴 설정</string>
+    <string name="setting_activity_write_review_txt">리뷰 쓰기</string>
+    <string name="setting_activity_recommend_txt">추천 하기</string>
     <string name="setting_activity_help_txt">사용법</string>
-    <string name="setting_activity_app_version_txt">버전정보</string>
+    <string name="setting_activity_app_version_txt">버전 정보</string>
     <!-- color setting activity-->
     <string name="color_setting_activity_title">배경색상</string>
     <!-- edit memo activity-->
@@ -19,6 +19,11 @@
 
     <!--pattern activity -->
     <string name="pattern_activity_subtext">패턴 등록 후 잊어버리면 시크릿모드를 해제할 수 없습니다. 주의해서 등록하세요.</string>
+    <string name="pattern_try_txt">잠금해제 패턴을 그리세요.</string>
+    <string name="pattern_error_txt">최소 4개 이상의 점을 연결하세요.\n다시 시도하세요.</string>
+    <string name="pattern_try_again_txt">확인을 위해 패턴을 다시 한 번 그리세요.</string>
+    <string name="pattern_try_current_txt">변경하기 전 패턴을 그리세요.</string>
+    <string name="pattern_error_txt_2">변경하기 전 패턴이 일치하지 않습니다.\n다시 시도하세요.</string>
 
     <!--help activity-->
     <string name="help_txt">- 작성 : +버튼 탭\n\n- 삭제 : 좌 or 우로 스와이프\n\n- 순서 이동 : 꾹 누른 후 이동\n\n- 수정 : 메모 탭</string>

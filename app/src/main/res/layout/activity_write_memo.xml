@@ -31,16 +31,14 @@
             android:textColor="@color/colorBlack"
             android:textSize="18dp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/write_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/done_img"
+            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="@string/write_memo_activity_save_btn_txt"
-            android:textColor="@color/colorBlack"
-            android:textSize="15dp"/>
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
     <!--구분선-->
     <LinearLayout

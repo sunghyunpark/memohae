@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import database.model.MemoVO;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import view.EditMemoActivity;
+import view.PatternActivity;
 import view.SettingActivity;
 import view.WriteMemoActivity;
 
@@ -156,10 +158,20 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
                 VHitem.memo_item_vg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), EditMemoActivity.class);
-                        intent.putExtra("memoNo", currentItem.getNo());
-                        intent.putExtra("memoText", currentItem.getMemoText());
-                        startActivity(intent);
+                        if(currentItem.isSecreteMode() && (!TextUtils.isEmpty(settingManager.getPatternKey()))){
+                            Intent intent = new Intent(getApplicationContext(), PatternActivity.class);
+                            intent.putExtra("memoNo", currentItem.getNo());
+                            intent.putExtra("memoText", currentItem.getMemoText());
+                            intent.putExtra("secreteMode", currentItem.isSecreteMode());
+                            intent.putExtra("patternMode", PatternActivity.SECRETE_MEMO_MODE);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(getApplicationContext(), EditMemoActivity.class);
+                            intent.putExtra("memoNo", currentItem.getNo());
+                            intent.putExtra("memoText", currentItem.getMemoText());
+                            intent.putExtra("secreteMode", currentItem.isSecreteMode());
+                            startActivity(intent);
+                        }
                     }
                 });
 
