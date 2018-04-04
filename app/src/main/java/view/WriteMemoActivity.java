@@ -58,6 +58,7 @@ public class WriteMemoActivity extends AppCompatActivity {
         int nextId = (maxId == null) ? 0:maxId.intValue() + 1;
 
         memoVO.setNo(nextId);
+        memoVO.setOrder(nextId);
         memoVO.setMemoText(memoTextStr);
         memoVO.setSecreteMode(false);
 

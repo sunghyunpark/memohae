@@ -16,6 +16,22 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 
+    <RelativeLayout
+        android:id="@+id/secrete_mode_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:background="#44424242">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/lock_outline_img"/>
+
+    </RelativeLayout>
+
     <!--구분선-->
     <LinearLayout
         android:layout_width="fill_parent"

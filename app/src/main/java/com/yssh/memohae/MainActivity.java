@@ -32,6 +32,7 @@ import database.RealmConfig;
 import database.model.MemoVO;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import view.EditMemoActivity;
 import view.PatternActivity;
 import view.SettingActivity;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
         RealmConfig realmConfig = new RealmConfig();
         mRealm = Realm.getInstance(realmConfig.MemoRealmVersion(getApplicationContext()));
 
-        RealmResults<MemoVO> memoVORealmResults = mRealm.where(MemoVO.class).findAll();
+        RealmResults<MemoVO> memoVORealmResults = mRealm.where(MemoVO.class).findAll().sort("order", Sort.DESCENDING);
         int listSize = memoVORealmResults.size();
 
         for(int i=listSize-1;i>=0;i--){
@@ -175,12 +176,21 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
                     }
                 });
 
+                if(isSecreteMode(position)){
+                    VHitem.memo_text_tv.setVisibility(View.GONE);
+                    VHitem.secrete_mode_vg.setVisibility(View.VISIBLE);
+                }else{
+                    VHitem.memo_text_tv.setVisibility(View.VISIBLE);
+                    VHitem.secrete_mode_vg.setVisibility(View.GONE);
+                }
+
             }
         }
 
         class MemoViewHolder extends RecyclerView.ViewHolder{
             @BindView(R.id.memo_item_layout) ViewGroup memo_item_vg;
             @BindView(R.id.memo_text_tv) TextView memo_text_tv;
+            @BindView(R.id.secrete_mode_layout) ViewGroup secrete_mode_vg;
 
             private MemoViewHolder(View itemView){
                 super(itemView);
@@ -189,9 +199,14 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
             }
         }
 
+        private boolean isSecreteMode(int position){
+            return getItem(position).isSecreteMode();
+        }
+
         @Override
         public boolean onItemMove(int fromPosition, int toPosition) {
             Collections.swap(listItems, fromPosition, toPosition);
+            swapMemoOrder(getItem(fromPosition).getOrder(), getItem(toPosition).getOrder());
             notifyItemMoved(fromPosition, toPosition);
             return true;
         }
@@ -236,6 +251,21 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
         memoVO.deleteFromRealm();
         mRealm.commitTransaction();
 
+    }
+
+    /**
+     * no 은 Primary key 라서 order 를 추가해서 사용함
+     * 단순 순서를 정하는 용도로만 사용
+     * @param fromOrder
+     * @param ToOrder
+     */
+    private void swapMemoOrder(int fromOrder, int ToOrder){
+        MemoVO fromMemoVO = mRealm.where(MemoVO.class).equalTo("order",(fromOrder)).findFirst();
+        MemoVO toMemoVO = mRealm.where(MemoVO.class).equalTo("order",(ToOrder)).findFirst();
+        mRealm.beginTransaction();
+        fromMemoVO.setOrder(ToOrder);
+        toMemoVO.setOrder(fromOrder);
+        mRealm.commitTransaction();
     }
 
     /**

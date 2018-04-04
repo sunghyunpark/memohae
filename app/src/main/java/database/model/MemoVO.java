@@ -10,6 +10,7 @@ import io.realm.annotations.PrimaryKey;
 public class MemoVO extends RealmObject{
     @PrimaryKey
     private int no;
+    private int order;
     private boolean isSecreteMode;
     private String memoText;
 
@@ -19,6 +20,14 @@ public class MemoVO extends RealmObject{
 
     public void setNo(int no) {
         this.no = no;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public boolean isSecreteMode() {

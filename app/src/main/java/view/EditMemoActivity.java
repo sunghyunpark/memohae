@@ -46,9 +46,6 @@ public class EditMemoActivity extends AppCompatActivity {
         memoText = intent.getExtras().getString("memoText");
         secreteMode = intent.getBooleanExtra("secreteMode", false);
 
-        Toast.makeText(getApplicationContext(), secreteMode+"", Toast.LENGTH_SHORT).show();
-
-
         ButterKnife.bind(this);
 
         init();
