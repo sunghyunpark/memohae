@@ -112,11 +112,14 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
         RealmResults<MemoVO> memoVORealmResults = mRealm.where(MemoVO.class).findAll().sort("order", Sort.DESCENDING);
         int listSize = memoVORealmResults.size();
 
-        for(int i=listSize-1;i>=0;i--){
+        for(int i=0;i<listSize;i++){
             memoItems.add(memoVORealmResults.get(i));
             Log.d("MemoData","============================================");
             Log.d("MemoData", "Memo NO : "+memoVORealmResults.get(i).getNo());
+            Log.d("MemoData", "Memo Order : "+memoVORealmResults.get(i).getOrder());
             Log.d("MemoData", "Memo Text : "+memoVORealmResults.get(i).getMemoText());
+            Log.d("MemoData", "Memo SecreteMode : " +memoVORealmResults.get(i).isSecreteMode()+"");
+            Log.d("MemoData", "Memo PhotoUri : "+memoVORealmResults.get(i).getMemoPhotoPath()+"");
             Log.d("MemoData","============================================");
         }
         adapter.notifyDataSetChanged();
@@ -164,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
                             intent.putExtra("memoNo", currentItem.getNo());
                             intent.putExtra("memoText", currentItem.getMemoText());
                             intent.putExtra("secreteMode", currentItem.isSecreteMode());
+                            intent.putExtra("memoPhoto", currentItem.getMemoPhotoPath());
                             intent.putExtra("patternMode", PatternActivity.SECRETE_MEMO_MODE);
                             startActivity(intent);
                         }else{
@@ -171,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
                             intent.putExtra("memoNo", currentItem.getNo());
                             intent.putExtra("memoText", currentItem.getMemoText());
                             intent.putExtra("secreteMode", currentItem.isSecreteMode());
+                            intent.putExtra("memoPhoto", currentItem.getMemoPhotoPath());
                             startActivity(intent);
                         }
                     }

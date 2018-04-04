@@ -7,16 +7,6 @@
     android:background="@color/colorPatterBackground"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/init_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:layout_gravity="right"
-        android:textColor="@color/colorWhite"
-        android:textSize="15dp"
-        android:text="초기화"/>
-
 
     <TextView
         android:id="@+id/pattern_text"

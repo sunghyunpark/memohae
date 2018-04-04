@@ -38,6 +38,7 @@ public class PatternActivity extends AppCompatActivity {
     private int memoNo;
     private String memoText;
     private boolean secreteMode;
+    private String memoPhoto;
     private SettingManager settingManager;
 
     @BindView(R.id.pattern_text) TextView pattern_text_tv;
@@ -104,6 +105,7 @@ public class PatternActivity extends AppCompatActivity {
                         intent.putExtra("memoNo", memoNo);
                         intent.putExtra("memoText", memoText);
                         intent.putExtra("secreteMode", secreteMode);
+                        intent.putExtra("memoPhoto", memoPhoto);
                         startActivity(intent);
                         finish();
                     }else{
@@ -136,6 +138,7 @@ public class PatternActivity extends AppCompatActivity {
             memoNo = intent.getIntExtra("memoNo",0);
             memoText = intent.getExtras().getString("memoText");
             secreteMode = intent.getBooleanExtra("secreteMode", false);
+            memoPhoto = intent.getExtras().getString("memoPhoto");
         }
 
         ButterKnife.bind(this);
@@ -168,23 +171,4 @@ public class PatternActivity extends AppCompatActivity {
         mPatternLockView.addPatternLockListener(mPatternLockViewListener);
     }
 
-    @OnClick(R.id.init_btn) void patternInitClicked(){
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("초기화");
-        alert.setMessage("패턴을 초기화 하시겠습니까?");
-        alert.setPositiveButton("예", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                settingManager.setPatternKey(null);
-                finish();
-            }
-        });
-        alert.setNegativeButton("아니오",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // Canceled.
-
-                    }
-                });
-        alert.show();
-    }
 }

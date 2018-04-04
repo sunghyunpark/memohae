@@ -69,6 +69,15 @@
         android:layout_below="@+id/app_title_bar"
         android:background="#9E9E9E"></LinearLayout>
 
+    <ImageView
+        android:id="@+id/memo_photo_iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        android:layout_marginBottom="15dp"/>
+
     <EditText
         android:id="@+id/memo_edit_box"
         android:layout_width="match_parent"

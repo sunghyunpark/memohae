@@ -1,5 +1,7 @@
 package database.model;
 
+import android.net.Uri;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -13,6 +15,7 @@ public class MemoVO extends RealmObject{
     private int order;
     private boolean isSecreteMode;
     private String memoText;
+    private String memoPhotoPath;
 
     public int getNo() {
         return no;
@@ -44,6 +47,14 @@ public class MemoVO extends RealmObject{
 
     public void setMemoText(String memoText) {
         this.memoText = memoText;
+    }
+
+    public String getMemoPhotoPath() {
+        return memoPhotoPath;
+    }
+
+    public void setMemoPhotoPath(String memoPhotoPath) {
+        this.memoPhotoPath = memoPhotoPath;
     }
 
 

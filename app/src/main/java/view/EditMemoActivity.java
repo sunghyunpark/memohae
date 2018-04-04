@@ -2,13 +2,19 @@ package view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.yssh.memohae.R;
 import com.yssh.memohae.SettingManager;
 
@@ -24,11 +30,13 @@ public class EditMemoActivity extends AppCompatActivity {
     private int memoNo;
     private String memoText;
     private boolean secreteMode;
+    private String memoPhoto;
     private Realm mRealm;
     private SettingManager settingManager;
 
     @BindView(R.id.memo_edit_box) EditText memo_edit_et;
     @BindView(R.id.lock_btn) ImageButton lock_btn;
+    @BindView(R.id.memo_photo_iv) ImageView memo_photo_iv;
 
     @Override
     public void onDestroy(){
@@ -45,6 +53,7 @@ public class EditMemoActivity extends AppCompatActivity {
         memoNo = intent.getIntExtra("memoNo",0);
         memoText = intent.getExtras().getString("memoText");
         secreteMode = intent.getBooleanExtra("secreteMode", false);
+        memoPhoto = intent.getExtras().getString("memoPhoto");
 
         ButterKnife.bind(this);
 
@@ -60,6 +69,8 @@ public class EditMemoActivity extends AppCompatActivity {
         memo_edit_et.setText(memoText);
 
         lockBtnStateChange();
+
+        setMemoPhoto();
     }
 
     /**
@@ -104,6 +115,20 @@ public class EditMemoActivity extends AppCompatActivity {
         }
     }
 
+    private void setMemoPhoto(){
+        if(!TextUtils.isEmpty(memoPhoto)){
+            memo_photo_iv.setVisibility(View.VISIBLE);
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.centerCrop();
+            requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+
+            Glide.with(getApplicationContext())
+                    .setDefaultRequestOptions(requestOptions)
+                    .load(memoPhoto)
+                    .into(memo_photo_iv);
+        }
+    }
+
     @OnClick(R.id.save_btn) void memoSaveClicked(){
         String updateMemoText = memo_edit_et.getText().toString();
         updateMemoText = updateMemoText.trim();
@@ -131,5 +156,11 @@ public class EditMemoActivity extends AppCompatActivity {
             updateSecreteModeDB(memoNo, secreteMode);
 
         }
+    }
+
+    @OnClick(R.id.memo_photo_iv) void memoPhotoClicked(){
+        Intent intent = new Intent(getApplicationContext(), ImageViewerActivity.class);
+        intent.putExtra("memoPhoto", memoPhoto);
+        startActivity(intent);
     }
 }
