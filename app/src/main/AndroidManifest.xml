@@ -20,7 +20,8 @@
         <activity android:name="view.WriteMemoActivity" />
         <activity android:name="view.ColorSettingActivity" />
         <activity android:name="view.EditMemoActivity" />
-        <activity android:name="view.HelpActivity"></activity>
+        <activity android:name="view.HelpActivity" />
+        <activity android:name="view.PatternActivity"></activity>
     </application>
 
 </manifest>

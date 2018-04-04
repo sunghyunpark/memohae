@@ -92,6 +92,11 @@ public class SettingActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
         startActivity(intent);
     }
+    
+    @OnClick(R.id.patter_setting_layout) void patternSettingClicked(){
+        Intent intent = new Intent(getApplicationContext(), PatternActivity.class);
+        startActivity(intent);
+    }
 
     @OnClick(R.id.recommend_layout) void recommendClicked(){
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);

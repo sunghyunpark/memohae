@@ -6,6 +6,7 @@
     <!-- setting activity -->
     <string name="setting_activity_title">설정</string>
     <string name="setting_activity_current_bg_txt">배경설정</string>
+    <string name="setting_activity_pattern_txt">패턴설정</string>
     <string name="setting_activity_write_review_txt">리뷰쓰기</string>
     <string name="setting_activity_recommend_txt">추천하기</string>
     <string name="setting_activity_help_txt">사용법</string>

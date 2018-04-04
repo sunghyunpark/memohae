@@ -20,4 +20,5 @@
     <color name="background_color_deep_orange">#FF5722</color>
     <color name="background_color_blue_gray">#607D8B</color>
     <color name="background_color_brown">#795548</color>
+    <color name="colorPatterBackground">#303030</color>
 </resources>
