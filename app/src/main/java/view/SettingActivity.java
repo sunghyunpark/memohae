@@ -21,20 +21,34 @@ import com.yssh.memohae.SettingManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import database.RealmConfig;
+import database.model.MemoVO;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class SettingActivity extends AppCompatActivity {
 
     private SettingManager settingManager;
+    private Realm mRealm;
 
     @BindView(R.id.current_background_color_iv) ImageView current_color_iv;
     @BindView(R.id.current_app_version_tv) TextView current_app_version_tv;
     @BindView(R.id.pattern_state_txt) TextView pattern_state_tv;
+
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(mRealm != null)
+        mRealm.close();
+    }
 
     @Override
     public  void onResume(){
         super.onResume();
         init();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +96,32 @@ public class SettingActivity extends AppCompatActivity {
         } catch(PackageManager.NameNotFoundException e) { }
     }
 
+    /**
+     * 패턴 확인
+     */
     private void hasPattern(){
         if(TextUtils.isEmpty(settingManager.getPatternKey())){
             pattern_state_tv.setText("설정 안됨");
         }else{
             pattern_state_tv.setText("설정 됨");
         }
+    }
+
+    /**
+     * 패턴 초기화를 하게되면 모든 메모들의 시크릿 모드를 OFF 로 변경
+     */
+    private void updateDBSecreteModeToOFF(){
+        RealmConfig realmConfig = new RealmConfig();
+        mRealm = Realm.getInstance(realmConfig.MemoRealmVersion(getApplicationContext()));
+
+        RealmResults<MemoVO> memoVORealmResults = mRealm.where(MemoVO.class).findAll();
+        int listSize = memoVORealmResults.size();
+        mRealm.beginTransaction();
+
+        for(int i=0;i<listSize;i++){
+            memoVORealmResults.get(i).setSecreteMode(false);
+        }
+        mRealm.commitTransaction();
     }
 
     @OnClick(R.id.back_btn) void backClicked(){
@@ -123,6 +157,7 @@ public class SettingActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     settingManager.setPatternKey(null);
                     pattern_state_tv.setText("설정 안됨");
+                    updateDBSecreteModeToOFF();
                 }
             });
             alert.setNegativeButton("아니오",
