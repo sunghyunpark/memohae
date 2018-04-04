@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,8 +22,11 @@ import butterknife.OnClick;
 
 public class SettingActivity extends AppCompatActivity {
 
+    private SettingManager settingManager;
+
     @BindView(R.id.current_background_color_iv) ImageView current_color_iv;
     @BindView(R.id.current_app_version_tv) TextView current_app_version_tv;
+    @BindView(R.id.pattern_state_txt) TextView pattern_state_tv;
 
     @Override
     public  void onResume(){
@@ -38,9 +42,13 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void init(){
+        settingManager = new SettingManager(getApplicationContext());
+
         currentColorThumbnail();
 
         currentAppVersion();
+
+        hasPattern();
 
     }
 
@@ -48,7 +56,6 @@ public class SettingActivity extends AppCompatActivity {
      * 현재 배경색상
      */
     private void currentColorThumbnail(){
-        SettingManager settingManager = new SettingManager(getApplicationContext());
         Drawable drawable = getResources().getDrawable(settingManager.getBackgroundColor());
         //Glide Options
         RequestOptions requestOptions = new RequestOptions();
@@ -71,6 +78,14 @@ public class SettingActivity extends AppCompatActivity {
             version = i.versionName;
             current_app_version_tv.setText("v"+version);
         } catch(PackageManager.NameNotFoundException e) { }
+    }
+
+    private void hasPattern(){
+        if(TextUtils.isEmpty(settingManager.getPatternKey())){
+            pattern_state_tv.setText("설정 안됨");
+        }else{
+            pattern_state_tv.setText("설정 됨");
+        }
     }
 
     @OnClick(R.id.back_btn) void backClicked(){

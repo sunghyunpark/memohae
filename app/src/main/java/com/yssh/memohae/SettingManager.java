@@ -23,6 +23,7 @@ public class SettingManager {
     // Shared preferences file name
     private static final String PREF_NAME = "memohae";
     private static final String KEY_BACKGROUND_COLOR = "background_color";
+    private static final String KEY_PATTERN = "pattern_key";
 
 
     public SettingManager(Context context) {
@@ -41,5 +42,16 @@ public class SettingManager {
 
     public int getBackgroundColor(){
         return pref.getInt(KEY_BACKGROUND_COLOR, R.color.background_color_default);
+    }
+
+    public void setPatternKey(String sha1Str){
+        editor.putString(KEY_PATTERN, sha1Str);
+
+        // commit changes
+        editor.commit();
+    }
+
+    public String getPatternKey(){
+        return pref.getString(KEY_PATTERN, null);
     }
 }

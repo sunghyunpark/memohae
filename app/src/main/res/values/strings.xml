@@ -17,5 +17,9 @@
     <string name="edit_memo_activity_title">수정</string>
     <string name="edit_memo_activity_save_btn_txt">저장</string>
 
+    <!--pattern activity -->
+    <string name="pattern_activity_subtext">패턴 등록 후 잊어버리면 시크릿모드를 해제할 수 없습니다. 주의해서 등록하세요.</string>
+
+    <!--help activity-->
     <string name="help_txt">- 작성 : +버튼 탭\n\n- 삭제 : 좌 or 우로 스와이프\n\n- 순서 이동 : 꾹 누른 후 이동\n\n- 수정 : 메모 탭</string>
 </resources>

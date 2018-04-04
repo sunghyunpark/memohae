@@ -47,6 +47,7 @@ public class WriteMemoActivity extends AppCompatActivity {
 
     /**
      * Realm DB 에 Memo 저장
+     * Secrete Mode 는 default > false
      * @param memoTextStr
      */
     private void insertDB(String memoTextStr){
@@ -58,6 +59,7 @@ public class WriteMemoActivity extends AppCompatActivity {
 
         memoVO.setNo(nextId);
         memoVO.setMemoText(memoTextStr);
+        memoVO.setSecreteMode(false);
 
         mRealm.copyToRealmOrUpdate(memoVO);
         mRealm.commitTransaction();
