@@ -155,6 +155,11 @@ public class EditMemoActivity extends AppCompatActivity {
             secreteMode = !secreteMode;
             lockBtnStateChange();
             updateSecreteModeDB(memoNo, secreteMode);
+            if(secreteMode){
+                Toast.makeText(getApplicationContext(),"시크릿모드로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(),"시크릿모드가 해제되었습니다.", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
