@@ -38,6 +38,9 @@ import view.PatternActivity;
 import view.SettingActivity;
 import view.WriteMemoActivity;
 
+/**
+ * commit test
+ */
 public class MainActivity extends AppCompatActivity implements OnStartDragListener {
 
     private ArrayList<MemoVO> memoItems;
