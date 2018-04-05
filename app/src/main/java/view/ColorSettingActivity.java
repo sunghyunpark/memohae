@@ -42,12 +42,12 @@ public class ColorSettingActivity extends AppCompatActivity {
             R.color.background_color_brown,
             R.color.background_color_blue_gray,
             R.color.background_color_indigo,
+            R.drawable.bg_img0,
             R.drawable.bg_img1,
             R.drawable.bg_img2,
             R.drawable.bg_img3,
             R.drawable.bg_img4,
-            R.drawable.bg_img5,
-            R.drawable.bg_img6
+            R.drawable.bg_img5
             };
     private SettingManager settingManager;
     private Display display;
@@ -81,17 +81,19 @@ public class ColorSettingActivity extends AppCompatActivity {
         colorRecyclerView.setLayoutManager(lLayout);
         colorRecyclerView.setAdapter(adapter);
 
+
     }
+
 
     /**
      * color recyclerView Adapter
      */
     public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private static final int TYPE_ITEM = 0;
-        private int[] colorArray;
+        private int [] listItems;
 
-        private RecyclerAdapter(int[] colorArray) {
-            this.colorArray = colorArray;
+        private RecyclerAdapter(int[] listItems) {
+            this.listItems = listItems;
         }
 
         @Override
@@ -104,34 +106,22 @@ public class ColorSettingActivity extends AppCompatActivity {
         }
 
         private int getItem(int position) {
-            return colorArray[position];
+            return listItems[position];
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
             if (holder instanceof ColorHolder) {
-                final int currentItem = getItem(position);
                 final ColorHolder VHitem = (ColorHolder)holder;
 
-                Drawable drawable = getResources().getDrawable(currentItem);
-
                 //Glide Options
-
-                RequestOptions requestOptions = new RequestOptions();
-                requestOptions.centerCrop();
-                requestOptions.placeholder(drawable);
-                //requestOptions.override(DISPLAY_WIDTH, DISPLAY_WIDTH);
-
-                Glide.with(getApplicationContext())
-                        .setDefaultRequestOptions(requestOptions)
-                        .load(null)
-                        .into(VHitem.color_iv);
+                setThumbnail(position, VHitem);
 
                 VHitem.item_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        settingManager.setBackgroundColor(currentItem);
+                        settingManager.setBackgroundColor(colorArray[position]);
                         Toast.makeText(getApplicationContext(), "배경 색상이 변경되었습니다.", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -150,6 +140,37 @@ public class ColorSettingActivity extends AppCompatActivity {
             }
         }
 
+        private int getResourceId(int position){
+            return getResources().getIdentifier("bg_img" + (position - 15), "drawable", getPackageName());
+        }
+
+        /**
+         * color 와 drawable 이 서로 다른데 같은 배열에 있어서 갯수로 분기처리함
+         * 추후 더 좋은 방법으로 수정해야할듯함
+         * @param position
+         * @param Vhitem
+         */
+        private void setThumbnail(int position, ColorHolder Vhitem){
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.centerCrop();
+
+            if(position >= 15){
+                Glide.with(getApplicationContext())
+                        .setDefaultRequestOptions(requestOptions)
+                        .load(getResourceId(position))
+                        .into(Vhitem.color_iv);
+            }else{
+
+                Drawable drawable = getResources().getDrawable(getItem(position));
+                requestOptions.placeholder(drawable);
+
+                Glide.with(getApplicationContext())
+                        .setDefaultRequestOptions(requestOptions)
+                        .load(null)
+                        .into(Vhitem.color_iv);
+            }
+
+        }
         class ColorHolder extends RecyclerView.ViewHolder{
 
             @BindView(R.id.color_iv) ImageView color_iv;
@@ -166,7 +187,7 @@ public class ColorSettingActivity extends AppCompatActivity {
         private boolean isChecked(int position){
             int currentColorId = settingManager.getBackgroundColor();
 
-            return currentColorId == getItem(position);
+            return currentColorId == colorArray[position];
         }
 
         @Override
@@ -176,7 +197,7 @@ public class ColorSettingActivity extends AppCompatActivity {
         //increasing getItemcount to 1. This will be the row of header.
         @Override
         public int getItemCount() {
-            return colorArray.length;
+            return listItems.length;
         }
     }
 
