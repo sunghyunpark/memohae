@@ -99,6 +99,21 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
 
     private void setBackground(){
         main_activity_vg.setBackgroundResource(settingManager.getBackgroundColor());
+        /*
+        Drawable drawable = getResources().getDrawable(settingManager.getBackgroundColor());
+
+        //Glide Options
+
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.centerCrop();
+        requestOptions.placeholder(drawable);
+        //requestOptions.override(DISPLAY_WIDTH, DISPLAY_WIDTH);
+
+        Glide.with(getApplicationContext())
+                .setDefaultRequestOptions(requestOptions)
+                .load(null)
+                .into(background_iv);
+                */
     }
 
     /**

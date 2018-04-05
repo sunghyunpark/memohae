@@ -1,13 +1,17 @@
 package view;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -38,9 +42,16 @@ public class ColorSettingActivity extends AppCompatActivity {
             R.color.background_color_brown,
             R.color.background_color_blue_gray,
             R.color.background_color_indigo,
-            R.drawable.bg_img1
+            R.drawable.bg_img1,
+            R.drawable.bg_img2,
+            R.drawable.bg_img3,
+            R.drawable.bg_img4,
+            R.drawable.bg_img5,
+            R.drawable.bg_img6
             };
     private SettingManager settingManager;
+    private Display display;
+    private int DISPLAY_WIDTH;
 
     @BindView(R.id.color_recyclerView) RecyclerView colorRecyclerView;
 
@@ -61,9 +72,13 @@ public class ColorSettingActivity extends AppCompatActivity {
     private void init(){
         settingManager = new SettingManager(getApplicationContext());
 
+        display = ((WindowManager)getApplicationContext().getSystemService(getApplicationContext().WINDOW_SERVICE)).getDefaultDisplay();
+        DISPLAY_WIDTH = display.getWidth();
+
         RecyclerAdapter adapter = new RecyclerAdapter(colorArray);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        colorRecyclerView.setLayoutManager(linearLayoutManager);
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        GridLayoutManager lLayout = new GridLayoutManager(getApplicationContext(),3);
+        colorRecyclerView.setLayoutManager(lLayout);
         colorRecyclerView.setAdapter(adapter);
 
     }
@@ -106,6 +121,7 @@ public class ColorSettingActivity extends AppCompatActivity {
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.centerCrop();
                 requestOptions.placeholder(drawable);
+                //requestOptions.override(DISPLAY_WIDTH, DISPLAY_WIDTH);
 
                 Glide.with(getApplicationContext())
                         .setDefaultRequestOptions(requestOptions)
@@ -120,6 +136,8 @@ public class ColorSettingActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+
+                VHitem.item_layout.setLayoutParams(thumbNailSize(getApplicationContext()));
 
                 /*
                 현재 선택되어있는 color 에 체크표시
@@ -160,6 +178,12 @@ public class ColorSettingActivity extends AppCompatActivity {
         public int getItemCount() {
             return colorArray.length;
         }
+    }
+
+    private FrameLayout.LayoutParams thumbNailSize(Context context){
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(DISPLAY_WIDTH/3,
+                DISPLAY_WIDTH/3);
+        return params;
     }
 
     @OnClick(R.id.back_btn) void backClicked(){

@@ -7,7 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yssh.memohae.MainActivity">
-
+    <!--
+    <ImageView
+        android:id="@+id/background_img_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+     -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/memo_recyclerView"
         android:layout_width="match_parent"
