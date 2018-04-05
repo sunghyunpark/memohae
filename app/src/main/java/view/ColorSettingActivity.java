@@ -37,7 +37,8 @@ public class ColorSettingActivity extends AppCompatActivity {
             R.color.background_color_deep_purple,
             R.color.background_color_brown,
             R.color.background_color_blue_gray,
-            R.color.background_color_indigo
+            R.color.background_color_indigo,
+            R.drawable.bg_img1
             };
     private SettingManager settingManager;
 

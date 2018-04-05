@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">memohae</string>
+    <string name="app_name">메모해</string>
     <!-- write memo activity -->
     <string name="write_memo_activity_title">메모</string>
     <string name="write_memo_activity_save_btn_txt">저장</string>
