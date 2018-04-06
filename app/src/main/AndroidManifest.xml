@@ -13,20 +13,28 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="view.SettingActivity" />
-        <activity android:name="view.WriteMemoActivity" />
-        <activity android:name="view.ColorSettingActivity" />
-        <activity android:name="view.EditMemoActivity" />
-        <activity android:name="view.HelpActivity" />
-        <activity android:name="view.PatternActivity" />
-        <activity android:name="view.ImageViewerActivity"></activity>
+        <activity android:name="view.SettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.WriteMemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.ColorSettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.EditMemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.HelpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.PatternActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.ImageViewerActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
