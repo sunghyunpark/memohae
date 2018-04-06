@@ -1,9 +1,8 @@
 package database.model;
 
-import android.net.Uri;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
 /**
  * Created by SungHyun on 2018-03-28.
@@ -14,6 +13,8 @@ public class MemoVO extends RealmObject{
     private int no;
     private int order;
     private boolean isSecreteMode;
+    @Required
+    private String secreteModeTitle;
     private String memoText;
     private String memoPhotoPath;
 
@@ -39,6 +40,14 @@ public class MemoVO extends RealmObject{
 
     public void setSecreteMode(boolean secreteMode) {
         isSecreteMode = secreteMode;
+    }
+
+    public String getSecreteModeTitle() {
+        return secreteModeTitle;
+   }
+
+    public void setSecreteModeTitle(String secreteModeTitle) {
+        this.secreteModeTitle = secreteModeTitle;
     }
 
     public String getMemoText() {

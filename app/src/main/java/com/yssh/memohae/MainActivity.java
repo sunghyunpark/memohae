@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,13 +132,17 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
 
         for(int i=0;i<listSize;i++){
             memoItems.add(memoVORealmResults.get(i));
+
+            /*
             Log.d("MemoData","============================================");
             Log.d("MemoData", "Memo NO : "+memoVORealmResults.get(i).getNo());
             Log.d("MemoData", "Memo Order : "+memoVORealmResults.get(i).getOrder());
             Log.d("MemoData", "Memo Text : "+memoVORealmResults.get(i).getMemoText());
             Log.d("MemoData", "Memo SecreteMode : " +memoVORealmResults.get(i).isSecreteMode()+"");
+            Log.d("MemoData", "Memo SecreteModeTitle : "+ memoVORealmResults.get(i).getSecreteModeTitle()+"");
             Log.d("MemoData", "Memo PhotoUri : "+memoVORealmResults.get(i).getMemoPhotoPath()+"");
             Log.d("MemoData","============================================");
+            */
         }
         adapter.notifyDataSetChanged();
 

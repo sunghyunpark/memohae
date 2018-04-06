@@ -1,9 +1,12 @@
 package view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -93,12 +96,13 @@ public class EditMemoActivity extends AppCompatActivity {
      * @param memoNo
      * @param secreteMode
      */
-    private void updateSecreteModeDB(int memoNo, boolean secreteMode){
+    private void updateSecreteModeDB(int memoNo, boolean secreteMode, String secreteModeTitle){
         mRealm.beginTransaction();
 
         MemoVO memoVO = mRealm.where(MemoVO.class).equalTo("no",memoNo).findFirst();
 
         memoVO.setSecreteMode(secreteMode);
+        memoVO.setSecreteModeTitle(secreteModeTitle);
 
         mRealm.commitTransaction();
     }
@@ -127,6 +131,8 @@ public class EditMemoActivity extends AppCompatActivity {
         }
     }
 
+
+
     @OnClick(R.id.save_btn) void memoSaveClicked(){
         String updateMemoText = memo_edit_et.getText().toString();
         updateMemoText = updateMemoText.trim();
@@ -147,17 +153,35 @@ public class EditMemoActivity extends AppCompatActivity {
     @OnClick(R.id.lock_btn) void lockClicked(){
         if(TextUtils.isEmpty(settingManager.getPatternKey())){
             Toast.makeText(getApplicationContext(), "패턴이 등록되어있지 않습니다. 설정 > 패턴 등록을 먼저 해주세요.", Toast.LENGTH_SHORT).show();
-
         }else{
             secreteMode = !secreteMode;
-            lockBtnStateChange();
-            updateSecreteModeDB(memoNo, secreteMode);
             if(secreteMode){
-                Toast.makeText(getApplicationContext(),"시크릿모드로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("시크릿 모드");
+                alert.setMessage("간단한 제목을 입력해주세요.");
+                // Set an EditText view to get user input
+                final EditText input = new EditText(EditMemoActivity.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                alert.setView(input);
+
+                alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        lockBtnStateChange();
+                        updateSecreteModeDB(memoNo, secreteMode, input.getText().toString());
+                        Toast.makeText(getApplicationContext(),"시크릿모드로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alert.setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // Canceled.
+                                secreteMode = !secreteMode;
+                            }
+                        });
+                alert.show();
             }else{
                 Toast.makeText(getApplicationContext(),"시크릿모드가 해제되었습니다.", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
