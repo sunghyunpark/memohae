@@ -3,6 +3,7 @@ package com.yssh.memohae;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.yssh.memohae.helper.ItemTouchHelperAdapter;
 import com.yssh.memohae.helper.OnStartDragListener;
 import com.yssh.memohae.helper.SimpleItemTouchHelperCallback;
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
 
     @BindView(R.id.main_activity_layout) ViewGroup main_activity_vg;
     @BindView(R.id.memo_recyclerView) RecyclerView memoRecyclerView;
+    @BindView(R.id.background_img_iv) ImageView background_iv;
 
     @Override
     public void onResume(){
@@ -98,12 +103,9 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
     }
 
     private void setBackground(){
-        main_activity_vg.setBackgroundResource(settingManager.getBackgroundColor());
-        /*
+        //main_activity_vg.setBackgroundResource(settingManager.getBackgroundColor());
         Drawable drawable = getResources().getDrawable(settingManager.getBackgroundColor());
-
         //Glide Options
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.centerCrop();
         requestOptions.placeholder(drawable);
@@ -113,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
                 .setDefaultRequestOptions(requestOptions)
                 .load(null)
                 .into(background_iv);
-                */
     }
 
     /**
