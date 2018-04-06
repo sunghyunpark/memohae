@@ -97,6 +97,7 @@ public class WriteMemoActivity extends AppCompatActivity {
         memoVO.setNo(nextId);
         memoVO.setOrder(nextId);
         memoVO.setMemoText(memoTextStr);
+        memoVO.setSecreteModeTitle("");
         memoVO.setSecreteMode(false);
         memoVO.setMemoPhotoPath(photoPath);
 

@@ -24,6 +24,7 @@ public class SettingManager {
     private static final String PREF_NAME = "memohae";
     private static final String KEY_BACKGROUND_COLOR = "background_color";
     private static final String KEY_PATTERN = "pattern_key";
+    private static final String KEY_TEXT_SIZE = "text_size";
 
 
     public SettingManager(Context context) {
@@ -53,5 +54,16 @@ public class SettingManager {
 
     public String getPatternKey(){
         return pref.getString(KEY_PATTERN, null);
+    }
+
+    public void setTextSize(int textSize){
+        editor.putInt(KEY_TEXT_SIZE, textSize);
+
+        // commit changes
+        editor.commit();
+    }
+
+    public int getTextSize(){
+        return pref.getInt(KEY_TEXT_SIZE, 15);
     }
 }

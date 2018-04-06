@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
         for(int i=0;i<listSize;i++){
             memoItems.add(memoVORealmResults.get(i));
 
-            /*
             Log.d("MemoData","============================================");
             Log.d("MemoData", "Memo NO : "+memoVORealmResults.get(i).getNo());
             Log.d("MemoData", "Memo Order : "+memoVORealmResults.get(i).getOrder());
@@ -142,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
             Log.d("MemoData", "Memo SecreteModeTitle : "+ memoVORealmResults.get(i).getSecreteModeTitle()+"");
             Log.d("MemoData", "Memo PhotoUri : "+memoVORealmResults.get(i).getMemoPhotoPath()+"");
             Log.d("MemoData","============================================");
-            */
+
         }
         adapter.notifyDataSetChanged();
 
@@ -205,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
 
                 if(isSecreteMode(position)){
                     VHitem.memo_text_tv.setVisibility(View.GONE);
+                    VHitem.secrete_mode_title_tv.setText(currentItem.getSecreteModeTitle());
                     VHitem.secrete_mode_vg.setVisibility(View.VISIBLE);
                 }else{
                     VHitem.memo_text_tv.setVisibility(View.VISIBLE);
@@ -218,11 +220,24 @@ public class MainActivity extends AppCompatActivity implements OnStartDragListen
             @BindView(R.id.memo_item_layout) ViewGroup memo_item_vg;
             @BindView(R.id.memo_text_tv) TextView memo_text_tv;
             @BindView(R.id.secrete_mode_layout) ViewGroup secrete_mode_vg;
+            @BindView(R.id.secrete_mode_title_tv) TextView secrete_mode_title_tv;
 
             private MemoViewHolder(View itemView){
                 super(itemView);
 
                 ButterKnife.bind(this, itemView);
+                setTextSize(settingManager.getTextSize());
+            }
+
+            /**
+             * default 15dp
+             * 15
+             * 20
+             * 25
+             * @param size
+             */
+            private void setTextSize(int size){
+                memo_text_tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
             }
         }
 

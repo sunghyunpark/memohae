@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -34,6 +36,9 @@ public class SettingActivity extends AppCompatActivity {
     @BindView(R.id.current_background_color_iv) ImageView current_color_iv;
     @BindView(R.id.current_app_version_tv) TextView current_app_version_tv;
     @BindView(R.id.pattern_state_txt) TextView pattern_state_tv;
+    @BindView(R.id.text_size_1_tv) TextView text_size_1_tv;
+    @BindView(R.id.text_size_2_tv) TextView text_size_2_tv;
+    @BindView(R.id.text_size_3_tv) TextView text_size_3_tv;
 
 
     @Override
@@ -65,6 +70,8 @@ public class SettingActivity extends AppCompatActivity {
         currentAppVersion();
 
         hasPattern();
+
+        setTextSize();
 
     }
 
@@ -122,6 +129,47 @@ public class SettingActivity extends AppCompatActivity {
             memoVORealmResults.get(i).setSecreteMode(false);
         }
         mRealm.commitTransaction();
+    }
+
+    /**
+     * settingManager 에 저장되어있는 사이즈를 초기화
+     */
+    private void setTextSize(){
+        int textSize = settingManager.getTextSize();
+
+        if(textSize == 15){
+            text_size_1_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+        }else if(textSize == 20){
+            text_size_2_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+        }else if(textSize == 25){
+            text_size_3_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+        }
+    }
+
+    /**
+     * 텍스트 사이즈를 선택 시 ui 변경
+     * @param num
+     */
+    private void textSizeChange(int num){
+        text_size_1_tv.setTextColor(Color.BLACK);
+        text_size_2_tv.setTextColor(Color.BLACK);
+        text_size_3_tv.setTextColor(Color.BLACK);
+
+        switch (num){
+            case 15:
+                text_size_1_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+                break;
+
+            case 20:
+                text_size_2_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+                break;
+
+            case 25:
+                text_size_3_tv.setTextColor(getResources().getColor(R.color.colorAccent));
+                break;
+        }
+
+        settingManager.setTextSize(num);
     }
 
     @OnClick(R.id.back_btn) void backClicked(){
@@ -182,6 +230,20 @@ public class SettingActivity extends AppCompatActivity {
         // Title of intent
         Intent chooser = Intent.createChooser(intent, "친구에게 공유하기");
         startActivity(chooser);
+    }
 
+    @OnClick(R.id.text_size_1_tv) void textSize15Clicked(){
+        textSizeChange(15);
+        Toast.makeText(getApplicationContext(), "글자 크기가 변경되었습니다. \n앱을 재실행해 주세요.", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.text_size_2_tv) void textSize20Clicked(){
+        textSizeChange(20);
+        Toast.makeText(getApplicationContext(), "글자 크기가 변경되었습니다. \n앱을 재실행해 주세요.", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.text_size_3_tv) void textSize25Clicked(){
+        textSizeChange(25);
+        Toast.makeText(getApplicationContext(), "글자 크기가 변경되었습니다. \n앱을 재실행해 주세요.", Toast.LENGTH_SHORT).show();
     }
 }

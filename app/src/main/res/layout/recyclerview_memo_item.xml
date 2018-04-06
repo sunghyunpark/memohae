@@ -24,11 +24,26 @@
         android:background="#44424242">
 
         <ImageView
+            android:id="@+id/secrete_img_iv"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:src="@mipmap/lock_outline_img"/>
+
+        <TextView
+            android:id="@+id/secrete_mode_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/secrete_img_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"/>
 
     </RelativeLayout>
 

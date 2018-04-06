@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -72,6 +73,12 @@ public class EditMemoActivity extends AppCompatActivity {
         lockBtnStateChange();
 
         setMemoPhoto();
+
+        setTextSize();
+    }
+
+    private void setTextSize(){
+        memo_edit_et.setTextSize(TypedValue.COMPLEX_UNIT_DIP, settingManager.getTextSize());
     }
 
     /**
@@ -180,6 +187,8 @@ public class EditMemoActivity extends AppCompatActivity {
                         });
                 alert.show();
             }else{
+                lockBtnStateChange();
+                updateSecreteModeDB(memoNo, secreteMode, "");
                 Toast.makeText(getApplicationContext(),"시크릿모드가 해제되었습니다.", Toast.LENGTH_SHORT).show();
             }
         }
