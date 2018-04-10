@@ -28,4 +28,7 @@
 
     <!--help activity-->
     <string name="help_txt">- 작성 : +버튼 탭\n\n- 삭제 : 좌 or 우로 스와이프\n\n- 순서 이동 : 꾹 누른 후 이동\n\n- 수정 : 메모 탭</string>
+
+    <!--open source activity-->
+    <string name="open_source_activity_title">오픈소스 라이선스</string>
 </resources>

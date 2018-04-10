@@ -246,4 +246,9 @@ public class SettingActivity extends AppCompatActivity {
         textSizeChange(25);
         Toast.makeText(getApplicationContext(), "글자 크기가 변경되었습니다. \n앱을 재실행해 주세요.", Toast.LENGTH_SHORT).show();
     }
+
+    @OnClick(R.id.open_source_layout) void openSourceClicked(){
+        Intent intent = new Intent(getApplicationContext(), OpenSourceActivity.class);
+        startActivity(intent);
+    }
 }
