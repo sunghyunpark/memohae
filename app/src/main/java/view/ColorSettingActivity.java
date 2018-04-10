@@ -50,8 +50,8 @@ public class ColorSettingActivity extends AppCompatActivity {
             R.drawable.bg_img5
             };
     private SettingManager settingManager;
-    private Display display;
     private int DISPLAY_WIDTH;
+    private int arraySize = colorArray.length;
 
     @BindView(R.id.color_recyclerView) RecyclerView colorRecyclerView;
 
@@ -72,7 +72,7 @@ public class ColorSettingActivity extends AppCompatActivity {
     private void init(){
         settingManager = new SettingManager(getApplicationContext());
 
-        display = ((WindowManager)getApplicationContext().getSystemService(getApplicationContext().WINDOW_SERVICE)).getDefaultDisplay();
+        Display display = ((WindowManager)getApplicationContext().getSystemService(getApplicationContext().WINDOW_SERVICE)).getDefaultDisplay();
         DISPLAY_WIDTH = display.getWidth();
 
         RecyclerAdapter adapter = new RecyclerAdapter(colorArray);
@@ -141,7 +141,7 @@ public class ColorSettingActivity extends AppCompatActivity {
         }
 
         private int getResourceId(int position){
-            return getResources().getIdentifier("bg_img" + (position - 15), "drawable", getPackageName());
+            return getResources().getIdentifier("bg_img" + (position - arraySize), "drawable", getPackageName());
         }
 
         /**
@@ -154,7 +154,7 @@ public class ColorSettingActivity extends AppCompatActivity {
             RequestOptions requestOptions = new RequestOptions();
             requestOptions.centerCrop();
 
-            if(position >= 15){
+            if(position >= arraySize){
                 Glide.with(getApplicationContext())
                         .setDefaultRequestOptions(requestOptions)
                         .load(getResourceId(position))
