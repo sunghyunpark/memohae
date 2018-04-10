@@ -218,7 +218,8 @@ public class WriteMemoActivity extends AppCompatActivity {
                     memo_photo_iv.setVisibility(View.VISIBLE);
                     RequestOptions requestOptions = new RequestOptions();
                     requestOptions.centerCrop();
-                    requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+                    requestOptions.circleCrop();    //circle
+                    requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
 
                     Glide.with(getApplicationContext())
                             .setDefaultRequestOptions(requestOptions)
