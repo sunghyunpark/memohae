@@ -188,6 +188,11 @@ public class WriteMemoActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.draw_btn) void drawClicked(){
+        Intent intent = new Intent(getApplicationContext(), DrawMemoActivity.class);
+        startActivity(intent);
+        finish();
+    }
     /**
      * 갤러리에서 사진을 불러오면 일단 글라이드에서는 uri로 보여줌(속도때문에)
      * 그리고 저장을 누르면 파일을 로컬 폴더에 저장

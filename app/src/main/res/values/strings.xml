@@ -31,4 +31,7 @@
 
     <!--open source activity-->
     <string name="open_source_activity_title">오픈소스 라이선스</string>
+
+    <!-- draw memo activity-->
+    <string name="draw_memo_activity_title">그리기</string>
 </resources>

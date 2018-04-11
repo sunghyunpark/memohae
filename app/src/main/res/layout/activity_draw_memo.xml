@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorWhite">
+
+    <ImageView
+        android:id="@+id/background_img_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <view.DrawView
+        android:id="@+id/drawView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/app_title_bar"
@@ -21,10 +33,11 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:background="@mipmap/back_btn_img"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/write_memo_activity_title"
+            android:text="@string/draw_memo_activity_title"
             android:layout_toRightOf="@+id/back_btn"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
@@ -32,31 +45,15 @@
             android:textSize="18dp"/>
 
         <ImageButton
-            android:id="@+id/write_btn"
+            android:id="@+id/save_btn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/done_img"
-            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
-
-        <ImageButton
-            android:id="@+id/select_photo_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/write_btn"
             android:layout_marginRight="15dp"
-            android:background="@mipmap/select_photo_img"/>
-
-        <ImageButton
-            android:id="@+id/draw_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/select_photo_btn"
-            android:layout_marginRight="15dp"
-            android:background="@mipmap/draw_img_48dp"/>
+            android:textColor="@color/colorBlack" />
+
     </RelativeLayout>
     <!--구분선-->
     <LinearLayout
@@ -67,22 +64,4 @@
         android:layout_below="@+id/app_title_bar"
         android:background="#9E9E9E"></LinearLayout>
 
-    <ImageView
-        android:id="@+id/memo_photo_iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:visibility="gone"
-        android:layout_marginBottom="15dp"/>
-
-    <EditText
-        android:id="@+id/memo_edit_box"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="15dp"
-        android:gravity="top"
-        android:background="@null"
-        android:textSize="15dp"/>
-
-</LinearLayout>
+</RelativeLayout>

@@ -43,7 +43,10 @@
         <activity
             android:name="view.ImageViewerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="view.OpenSourceActivity"
+        <activity
+            android:name="view.OpenSourceActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="view.DrawMemoActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 
